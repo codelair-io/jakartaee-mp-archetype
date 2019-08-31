@@ -28,10 +28,10 @@
             <includes>
                 <include>.gitignore</include>
                 <include>README.md</include>
-                <include>*Dockerfile*</include>
                 <include>wad*</include>
                 <include>*mvn*</include>
                 <include>.mvn/*</include>
+		<include>liberty/</include>
             </includes>
         </fileSet>
     </fileSets>

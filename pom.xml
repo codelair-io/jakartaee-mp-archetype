@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <!--Project identifier-->
-    <groupId>io.hassannazar</groupId>
+    <groupId>net.hassannazar</groupId>
     <artifactId>jakartaee-mp-archetype</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>maven-archetype</packaging>

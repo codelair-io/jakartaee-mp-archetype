@@ -40,6 +40,16 @@ Below is en excerpt from https://hub.docker.com/r/hassenasse/s2i-openliberty, wh
 ## Payara Micro
 > IMPORTANT: The archetype merely pulls in a workable starting point. All configuration files in the respective server-folders should be reviewed and tuned before deploy.
 
+Below is en excerpt from https://hub.docker.com/r/hassenasse/s2i-payara-micro, which details each file in ./payara and their purpose.  
+
+| File/Folder Name   |                                                                                    Description                                                                                     |
+| ------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| asadmin-preboot    |                                    Provides a file of asadmin commands to run before booting the server (only some commands work at this point)                                    |
+| asadmin-postboot   |                                                        Provides a file of asadmin commands to run after booting the server                                                         |
+| asadmin-postdeploy |                                                  Provides a file of asadmin commands to run after all deployments have completed                                                   |
+| lib/               | Allows adding various third-party libraries to the class path of a Payara Micro instance. Use cases may include required JDBC drivers, or libraries used by multiple applications. |
+
+
 ## Apache TomEE
 > IMPORTANT: The archetype merely pulls in a workable starting point. All configuration files in the respective server-folders should be reviewed and tuned before deploy.
 

@@ -18,13 +18,13 @@
     <!--Organization-->
     <organization>
         <name>Hassan Nazar</name>
-        <url>https://hassannazar.io</url>
+        <url>https://hassannazar.net</url>
     </organization>
 
     <developers>
         <developer>
             <name>Hassan Nazar</name>
-            <organizationUrl>https://hassannazar.io</organizationUrl>
+            <organizationUrl>https://hassannazar.net</organizationUrl>
         </developer>
     </developers>
 
@@ -36,6 +36,11 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+
+    <!--SCM-->
+    <scm>
+        <url>https://github.com/HasseNasse/jakartaee-mp-archetype/</url>
+    </scm>
 
     <!-- Build Definition -->
     <build>

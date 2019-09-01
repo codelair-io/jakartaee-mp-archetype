@@ -10,7 +10,7 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 /**
  *
- * @author hassannazar.io
+ * @author hassannazar.net
  */
 @Path("ping")
 public class PingResource {

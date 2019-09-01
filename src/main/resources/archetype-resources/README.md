@@ -10,9 +10,9 @@ A starter archetype for a ThinWar project using Jakarta EE and MicroProfile, wit
 The archetype is built to be highly configurable, however we are somewhat opinionated:
 
 - Maven Build tool is used with an included maven wrapper
-- wad (Watch and Deploy) by Adam Bien is included
+- wad (Watch and Deploy) by Adam Bien is included for easier development, see www.wad.sh
 - ThinWar deployment strategy is enforced
-- A certain selection of Java EE / Servlet Containers have native support. (see below for more info.)
+- A certain selection of Java EE / Servlet Containers have native support using s2i images. (see below for more info.)
 
 # Usage with S2I images
 

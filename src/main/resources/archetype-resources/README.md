@@ -1,30 +1,34 @@
 # Jakarta EE & MicroProfile Project Archetype
-A starter archetype for a ThinWar project using Jakarta EE and MicroProfile, without any sketchy parent-pom's. 
+
+A starter archetype for a ThinWar project using Jakarta EE and MicroProfile, without any sketchy parent-pom's.
 
 | Dependency           | Version |
-|----------------------|---------|
+| -------------------- | ------- |
 | Java EE / Jakarta EE | 8       |
 | MicroProfile         | 3.0     |
 
-The archetype is built to be highly configurable, however we are somewhat opinionated:  
+The archetype is built to be highly configurable, however we are somewhat opinionated:
+
 - Maven Build tool is used with an included maven wrapper
 - wad (Watch and Deploy) by Adam Bien is included
 - ThinWar deployment strategy is enforced
 - A certain selection of Java EE / Servlet Containers have native support. (see below for more info.)
 
 # Usage
+
 A Thin-WAR packaged application often contains only the application source code and its internal dependencies, and is often deployed on a standalone Java EE / Servlet Container. The Archetype provides configuration files for a variety of different Java EE Containers, and can be used in cloud-native container runtime environment (e.g. OpenShift / Kubernetes) by using one of the accompanied s2i-images.
 
-| Application Server | Config Folder Name | S2I Image                                    |   Availability   |
-|--------------------|--------------------|----------------------------------------------|:----------------:|
-| IBM OpenLiberty    | ./liberty/         | [hassenasse/s2i-openliberty:[19.0.0.8-jdk8/jdk11]](https://hub.docker.com/r/hassenasse/s2i-openliberty) |     Available    |
-| Payara Micro       | ./payara/          | hassenasse/s2i-payara:[..]                   | Work In Progress |
-| Apache TomEE       | ./tomee/           | hassenasse/s2i-tomee:[..]                    | Work In Progress |
-| KumuluzEE          | ./kumuluz/         | hassenasse/s2i-kumuluzee:[..]                | Work In Progress |
+| Application Server | Config Folder Name | S2I Image                                                                                               |   Availability   |
+| ------------------ | ------------------ | ------------------------------------------------------------------------------------------------------- | :--------------: |
+| IBM OpenLiberty    | ./liberty/         | [hassenasse/s2i-openliberty:[19.0.0.8-jdk8/jdk11]](https://hub.docker.com/r/hassenasse/s2i-openliberty) |    Available     |
+| Payara Micro       | ./payara/          | [hassenasse/s2i-payara:[5.193-jdk8/jdk11]](https://hub.docker.com/r/hassenasse/s2i-payara-micro)        |    Available     |
+| Apache TomEE       | ./tomee/           | hassenasse/s2i-tomee:[..]                                                                               | Work In Progress |
+| KumuluzEE          | ./kumuluz/         | hassenasse/s2i-kumuluzee:[..]                                                                           | Work In Progress |
 
 Choose the application server needed for your particular project, and discard the rest of the config-folders. Based on the selection of application server vendor, the MicroProfile dependency version in the `pom.xml` might require tweaking. Per default the archetype ships with `MicroProfile 3.0`. Read the corresponding server documentation and s2i doc for more information about the supporting MP version.
 
 ## IBM OpenLiberty
+
 > IMPORTANT: The archetype merely pulls in a workable starting point. All configuration files in the respective server-folders should be reviewed and tuned before deploy.
 
 Below is en excerpt from https://hub.docker.com/r/hassenasse/s2i-openliberty, which details each file in `./liberty` and their purpose.
@@ -38,9 +42,10 @@ Below is en excerpt from https://hub.docker.com/r/hassenasse/s2i-openliberty, wh
 | resources/           |                                                                       Shared resource definitions: adapters, data sources, are injected into `wlp/usr/shared/resources/`. Can be referenced in server.xml using `${shared.resource.dir}` property.                                                                        |
 
 ## Payara Micro
+
 > IMPORTANT: The archetype merely pulls in a workable starting point. All configuration files in the respective server-folders should be reviewed and tuned before deploy.
 
-Below is en excerpt from https://hub.docker.com/r/hassenasse/s2i-payara-micro, which details each file in ./payara and their purpose.  
+Below is en excerpt from https://hub.docker.com/r/hassenasse/s2i-payara-micro, which details each file in ./payara and their purpose.
 
 | File/Folder Name   |                                                                                    Description                                                                                     |
 | ------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
@@ -49,9 +54,10 @@ Below is en excerpt from https://hub.docker.com/r/hassenasse/s2i-payara-micro, w
 | asadmin-postdeploy |                                                  Provides a file of asadmin commands to run after all deployments have completed                                                   |
 | lib/               | Allows adding various third-party libraries to the class path of a Payara Micro instance. Use cases may include required JDBC drivers, or libraries used by multiple applications. |
 
-
 ## Apache TomEE
+
 > IMPORTANT: The archetype merely pulls in a workable starting point. All configuration files in the respective server-folders should be reviewed and tuned before deploy.
 
 ## KumuluzEE
+
 > IMPORTANT: The archetype merely pulls in a workable starting point. All configuration files in the respective server-folders should be reviewed and tuned before deploy.

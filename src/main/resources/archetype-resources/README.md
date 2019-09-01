@@ -22,7 +22,7 @@ A Thin-WAR packaged application often contains only the application source code 
 | Apache TomEE       | ./tomee/           | hassenasse/s2i-tomee:[..]                    | Work In Progress |
 | KumuluzEE          | ./kumuluz/         | hassenasse/s2i-kumuluzee:[..]                | Work In Progress |
 
-Choose the application server needed for your particular project, and discard the rest of the config-folders.
+Choose the application server needed for your particular project, and discard the rest of the config-folders. Based on the selection of application server vendor, the MicroProfile dependency version in the `pom.xml` might require tweaking. Per default the archetype ships with `MicroProfile 3.0`. Read the corresponding server documentation and s2i doc for more information about the supporting MP version.
 
 ## IBM OpenLiberty
 > IMPORTANT: The archetype merely pulls in a workable starting point. All configuration files in the respective server-folders should be reviewed and tuned before deploy.

@@ -37,9 +37,8 @@
 
     <!--SCM-->
     <scm>
-        <connection>scm:git:git://github.com/HasseNasse/jakartaee-mp-archetype/</connection>
-      <tag>v1.0.0</tag>
-  </scm>
+        <connection>scm:git:git@github.com:/HasseNasse/jakartaee-mp-archetype.git</connection>
+    </scm>
 
     <!--Distribution Management-->
     <distributionManagement>

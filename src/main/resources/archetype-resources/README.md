@@ -10,9 +10,9 @@ A starter archetype for a ThinWar project using Jakarta EE and MicroProfile, wit
 The archetype is built to be highly configurable, however we are somewhat opinionated:
 
 - Maven Build tool is used with an included maven wrapper
-- wad (Watch and Deploy) by Adam Bien is included
+- wad (Watch and Deploy) by Adam Bien is included for easier development, see www.wad.sh
 - ThinWar deployment strategy is enforced
-- A certain selection of Java EE / Servlet Containers have native support. (see below for more info.)
+- A certain selection of Java EE / Servlet Containers have native support using s2i images. (see below for more info.)
 
 # Usage with S2I images
 
@@ -21,7 +21,7 @@ A Thin-WAR packaged application often contains only the application source code 
 | Application Server | Config Folder Name | S2I Image                                                                                               |   Availability   |
 | ------------------ | ------------------ | ------------------------------------------------------------------------------------------------------- | :--------------: |
 | IBM OpenLiberty    | ./liberty/         | [hassenasse/s2i-openliberty:[19.0.0.8-jdk8/jdk11]](https://hub.docker.com/r/hassenasse/s2i-openliberty) |    Available     |
-| Payara Micro       | ./payara/          | [hassenasse/s2i-payara:[5.193-jdk8/jdk11]](https://hub.docker.com/r/hassenasse/s2i-payara-micro)        |    Available     |
+| Payara Micro       | ./payara/          | [hassenasse/s2i-payara-micro:[5.193-jdk8/jdk11]](https://hub.docker.com/r/hassenasse/s2i-payara-micro)        |    Available     |
 | KumuluzEE          | ./kumuluz/         | hassenasse/s2i-kumuluzee:[..]                                                                           | Work In Progress |
 | Apache TomEE       | ./tomee/           | hassenasse/s2i-tomee:[..]                                                                               | Work In Progress |
 

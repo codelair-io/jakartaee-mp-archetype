@@ -1,3 +1,10 @@
+#PostBoot config
+
+#Enable dynamic reloading of applications
+set configs.config.server-config.admin-service.das-config.dynamic-reload-enabled=true
+#Enable auto deployment
+set configs.config.server-config.admin-service.das-config.autodeploy-enabled=true
+
 #Optimizing Heap size
 delete-jvm-options -client:-Xmx1024:-Xms512
 create-jvm-options -server:-Xmx2048:-Xms2048

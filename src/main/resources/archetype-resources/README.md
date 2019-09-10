@@ -21,7 +21,7 @@ A Thin-WAR packaged application often contains only the application source code 
 | Application Server | Config Folder Name | S2I Image                                                                                               |   Availability   |
 | ------------------ | ------------------ | ------------------------------------------------------------------------------------------------------- | :--------------: |
 | IBM OpenLiberty    | ./liberty/         | [hassenasse/s2i-openliberty:[19.0.0.8-jdk8/jdk11]](https://hub.docker.com/r/hassenasse/s2i-openliberty) |    Available     |
-| Payara Micro       | ./payara/          | [hassenasse/s2i-payara-micro:[5.193-jdk8/jdk11]](https://hub.docker.com/r/hassenasse/s2i-payara-micro)        |    Available     |
+| Payara Micro       | ./payara/          | [hassenasse/s2i-payara-micro:[5.193-jdk8/jdk11]](https://hub.docker.com/r/hassenasse/s2i-payara-micro)  |    Available     |
 | KumuluzEE          | ./kumuluz/         | hassenasse/s2i-kumuluzee:[..]                                                                           | Work In Progress |
 | Apache TomEE       | ./tomee/           | hassenasse/s2i-tomee:[..]                                                                               | Work In Progress |
 
@@ -30,6 +30,22 @@ Choose the application server needed for your particular project, and discard th
 ## IBM OpenLiberty
 
 > IMPORTANT: The archetype merely pulls in a workable starting point. All configuration files in the respective server-folders should be reviewed and tuned before deploy.
+
+### Development
+
+A `dev-run.sh` script is provided under `./liberty` folder to allow running a local development environment on a docker container. The shell script provisions an openliberty container on a running engine, and starts `wad (Watch and Deploy)` with docker volume mounts to automatically traverse changes to the container when developing. In addition, volume mounts are added to the following files in `./liberty`
+
+- server.xml
+- server.env
+- jvm.properties
+- bootstrap.properties
+
+1. Start the dev-environment using `./liberty/dev-run.sh`  
+   Whilst developing, `wad` will watch for file changes in `src`, run a `mvn clean install` to a artifact directory which the docker image is mounted to.
+2. Inspect the image using `docker container ls`
+3. Inspect logs using `docker logs development-openliberty-jdk<11/1.8> -f`
+
+### S2I Deployment
 
 Below is en excerpt from https://hub.docker.com/r/hassenasse/s2i-openliberty, which details each file in `./liberty` and their purpose.
 
@@ -44,6 +60,22 @@ Below is en excerpt from https://hub.docker.com/r/hassenasse/s2i-openliberty, wh
 ## Payara Micro
 
 > IMPORTANT: The archetype merely pulls in a workable starting point. All configuration files in the respective server-folders should be reviewed and tuned before deploy.
+
+### Development
+Development with auto-deploy for payara-micro is currently not supported, thus, we use a payara-full image for development purposes.  
+A `dev-run.sh` script is provided under `./payara` folder to allow running a local development environment on a docker container. The shell script provisions an openliberty container on a running engine, and starts `wad (Watch and Deploy)` with docker volume mounts to automatically traverse changes to the container when developing. In addition, volume mounts are added to the following files in `./payara`
+
+- asadmin-preboot
+- asadmin-postboot
+- lib/
+
+1. Start the dev-environment using `./payara/dev-run.sh`  
+   Whilst developing, `wad` will watch for file changes in `src`, run a `mvn clean install` to a artifact directory which the docker image is mounted to.
+2. Inspect the image using `docker container ls`
+3. Inspect logs using `docker logs development-payara-full-jdk<11/1.8> -f`
+
+
+### S2I Deployment
 
 Below is en excerpt from https://hub.docker.com/r/hassenasse/s2i-payara-micro, which details each file in ./payara and their purpose.
 

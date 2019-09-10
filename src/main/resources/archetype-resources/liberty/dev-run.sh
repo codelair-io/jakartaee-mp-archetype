@@ -12,7 +12,8 @@ echo "JDK version (extracted from pom.xml): ${JDK_VERSION}"
 echo "WAR name (extracted from pom.xml): ${WAR_NAME}"
 
 echo "--> Pre-building application using maven"
-mvn clean install
+./mvnw clean install
+
 echo "--> Running openliberty dev-environment v${SERVER_VERSION} using ${JDK_VERSION} on docker"
 docker run -d --rm \
     -p 9080:9080 -p 9443:9443 \
@@ -23,6 +24,7 @@ docker run -d --rm \
     -v "$(pwd)"/liberty/resources:/opt/liberty/wlp/usr/shared/resources/ \
     -v /tmp/wad-dropins/:/opt/liberty/wlp/usr/servers/defaultServer/dropins/ \
     --name ${CONTAINER_NAME} \
-    hassenasse/dev-openliberty:${SERVER_VERSION}-${JDK_VERSION}
+    hassenasse/openliberty:${SERVER_VERSION}-${JDK_VERSION}
 
+echo "--> Starting WAD (Watch and Deploy)..."
 java -jar wad.jar /tmp/wad-dropins/

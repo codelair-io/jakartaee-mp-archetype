@@ -8,3 +8,5 @@ set configs.config.server-config.admin-service.das-config.autodeploy-enabled=tru
 #Optimizing Heap size
 delete-jvm-options -client:-Xmx1024:-Xms512
 create-jvm-options -server:-Xmx2048:-Xms2048
+deploy /opt/payara/deployments/abc-app.war
+deploy /opt/payara/deployments/.autodeploystatus

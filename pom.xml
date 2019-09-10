@@ -1,18 +1,28 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>9</version>
+    </parent>
 
     <!--Project identifier-->
     <groupId>net.hassannazar</groupId>
     <artifactId>jakartaee-mp-archetype</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.1.1-SNAPSHOT</version>
     <packaging>maven-archetype</packaging>
+
+    <name>Jakarta EE and MicroProfile Archetype</name>
+    <description>
+        A starter archetype for a ThinWar project using Jakarta EE and MicroProfile, without any sketchy parent-pom's.
+    </description>
+    <url>https://github.com/HasseNasse/jakartaee-mp-archetype</url>
 
     <!-- Project Properties -->
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
     <!--Organization-->
@@ -39,7 +49,10 @@
 
     <!--SCM-->
     <scm>
-        <url>https://github.com/HasseNasse/jakartaee-mp-archetype/</url>
+        <connection>scm:git:git@github.com:HasseNasse/jakartaee-mp-archetype.git</connection>
+        <url>scm:git:git@github.com:HasseNasse/jakartaee-mp-archetype.git</url>
+        <developerConnection>scm:git:git@github.com:HasseNasse/jakartaee-mp-archetype.git</developerConnection>
+        <tag>HEAD</tag>
     </scm>
 
     <!--Distribution Management-->
@@ -106,10 +119,11 @@
                 <version>2.5.3</version>
                 <configuration>
                     <tagNameFormat>v@{project.version}</tagNameFormat>
+                    <localCheckout>true</localCheckout>
+                    <pushChanges>false</pushChanges>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-
 
 </project>

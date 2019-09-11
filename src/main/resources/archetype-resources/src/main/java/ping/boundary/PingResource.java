@@ -12,6 +12,7 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
  *
  * @author hassannazar.net
  */
+@Timed
 @Path("ping")
 public class PingResource {
 

@@ -14,6 +14,22 @@ The archetype is built to be highly configurable, however we are somewhat opinio
 - ThinWar deployment strategy is enforced
 - A certain selection of Java EE / Servlet Containers have native support using s2i images. (see below for more info.)
 
+# Metrics using Prometheus + Grafana
+An folder with name `./metrics` is provided with the following files:  
+
+| File path                 | Description                                                                                                                                                             |
+|---------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ./metrics/prometheus.yml  | YAML formatted type which is injected into the prometheus runtime for configuration. This file defines various scraping targets for prometheus and scrape interval etc. |
+| ./metrics/metrics-init.sh | Shell-script for initiating a prometheus and grafana docker-containers.                                                                                                 |
+  
+## Gathering and visualizing
+1. Start the application server with your application deployment
+2. Start prometheus and grafana using `cd metrics && ./metrics-init.sh`
+3. Navigate to `http://localhost:9090/targets` and inspect that the `status` for your particular application server is up
+and scraping metrics.
+4. Navigate to `http://localhost:3000` and configure a `browser` based prometheus datasource which points to `http://localhost:9090`. Choose `save and test`.
+5. You can now create your dashboards using the Prometheus/OpenMetrics-QL.
+
 # Usage with S2I images
 
 A Thin-WAR packaged application often contains only the application source code and its internal dependencies, and is often deployed on a standalone Java EE / Servlet Container. The Archetype provides configuration files for a variety of different Java EE Containers, and can be used in cloud-native container runtime environment (e.g. OpenShift / Kubernetes) by using one of the accompanied s2i-images.

@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import ${package}.ping.model.Greeting;
+import org.eclipse.microprofile.metrics.annotation.Timed;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 /**

@@ -14,8 +14,18 @@ The archetype is built to be highly configurable, however we are somewhat opinio
 - ThinWar deployment strategy is enforced
 - A certain selection of Java EE / Servlet Containers have native support using s2i images. (see below for more info.)
 
-# Metrics using Prometheus + Grafana
-An folder with name `./metrics` is provided with the following files:  
+## Overview of included components
+| Folder path                 | Description                                                                                                                                                             |
+|---------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ./liberty  | OpenLiberty Server configuration folder, usable with [hassenasse/s2i-openliberty:[19.0.0.8-jdk8/jdk11]](https://hub.docker.com/r/hassenasse/s2i-openliberty) s2i image. Additionally contains a `dev-run.sh` which starts a development environment image of OpenLiberty and [WAD](www.wad.sh). |
+| ./payara  | Payara Micro Server configuration folder, usable with [hassenasse/s2i-payara-micro:[5.193-jdk8/jdk11]](https://hub.docker.com/r/hassenasse/s2i-payara-micro) s2i image. Additionally contains a `dev-run.sh` which starts a development environment image of Payara Full and [WAD](www.wad.sh). |
+| ./kumuluz  | KumuluzEE Server configuration folder, (to be added) |
+| ./tomee  | Apache TomEE Server configuration folder, (to be added) |
+| ./metrics | Folder containing                                                                                                  |
+| ./ci | Shell-script for initiating a prometheus and grafana docker-containers.                                                                                                 |
+
+# Metrics using Prometheus & Grafana
+A folder with name `./metrics` is provided with the following files:  
 
 | File path                 | Description                                                                                                                                                             |
 |---------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

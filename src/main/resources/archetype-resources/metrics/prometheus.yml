@@ -14,16 +14,19 @@ rule_files:
 scrape_configs:
   # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
   - job_name: 'payara'
-
     # metrics_path defaults to '/metrics'
     # scheme defaults to 'http'.
 
     static_configs:
-      - targets: ['docker.for.mac.localhost:8080']
+      - targets: ['docker.for.mac.localhost:8080'] # Use this for MAC
+      - targets: ['docker.for.win.localhost:8080'] # Use this for WIN
+      - targets: ['localhost:8080'] # Use this for LINUX
 
   - job_name: 'openliberty'
-      # metrics_path defaults to '/metrics'
+    # metrics_path defaults to '/metrics'
     # scheme defaults to 'http'.w
 
     static_configs:
-      - targets: ['docker.for.mac.localhost:9080']
+      - targets: ['docker.for.mac.localhost:9080'] # Use this for MAC
+      - targets: ['docker.for.win.localhost:9080'] # Use this for WIN
+      - targets: ['localhost:9080'] # Use this for LINUX

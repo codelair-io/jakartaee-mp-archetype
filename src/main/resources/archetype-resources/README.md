@@ -18,19 +18,22 @@ The archetype is built to be highly configurable, however we are somewhat opinio
 
 1: [Metrics using Prometheus + Grafana](#metrics)  
 -> 1.1: [Gathering and visualizing](#metrics11)  
-2: [Usage with S2I images](#s2i)  
--> 2.1: [IBM OpenLiberty](#s2iol)  
--> -> 2.1.1: [Development](#s2ioldev)  
--> -> 2.1.2: [S2I Deployment](#s2iols2i)  
--> 2.2: [Payara Micro](#s2ipm)  
--> -> 2.2.1: [Development](#s2ipmdev)  
--> -> 2.2.2: [S2I Deployment](#s2ipms2i)  
--> 2.3: [KumuluzEE](#s2ikmee) **(COMING SOON)**  
--> -> 2.3.1: [Development](#s2ikmeedev)  
--> -> 2.3.2: [S2I Deployment](#s2ikmees2i)  
--> 2.4: [Apache TomEE](#s2iatee) **(COMING SOON)**  
--> -> 2.4.1: [Development](#s2iateedev)  
--> -> 2.4.2: [S2I Deployment](#s2iatees2i)
+2: [CI/CD](#cicd)  
+-> 2.1: [Prerequisites](#cicdpr)  
+-> 2.2: [Setup](#cicdsetup)  
+3: [Usage with S2I images](#s2i)  
+-> 3.1: [IBM OpenLiberty](#s2iol)  
+----> 3.1.1: [Development](#s2ioldev)  
+----> 3.1.2: [S2I Deployment](#s2iols2i)  
+-> 3.2: [Payara Micro](#s2ipm)  
+----> 3.2.1: [Development](#s2ipmdev)  
+----> 3.2.2: [S2I Deployment](#s2ipms2i)  
+-> 3.3: [KumuluzEE](#s2ikmee) **(COMING SOON)**  
+----> 3.3.1: [Development](#s2ikmeedev)  
+----> 3.3.2: [S2I Deployment](#s2ikmees2i)  
+-> 3.4: [Apache TomEE](#s2iatee) **(COMING SOON)**  
+----> 3.4.1: [Development](#s2iateedev)  
+----> 3.4.2: [S2I Deployment](#s2iatees2i)
 
 # Metrics using Prometheus + Grafana
 
@@ -53,6 +56,26 @@ An folder with name `./metrics` is provided with the following files:
    and scraping metrics.
 4. Navigate to `http://localhost:3000` and configure a `browser` based prometheus datasource which points to `http://localhost:9090`. Choose `save and test`.
 5. You can now create your dashboards using the Prometheus/OpenMetrics-QL.
+
+# CI/CD
+
+<a id="cicd"> </a>
+The archetype provides with preconfigured Jenkins pipelines to allow for a quicker CI/CD setup both locally and/or on OpenShift. The following files are provided:
+
+|       File Name       |                                                                                                                                                                  Description                                                                                                                                                                  |
+| :-------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|    ci/Jenkinsfile     | Base Jenkinsfile for deployment to a DEV and TEST environment. The Jenkinsfile reads thepom.xml ArtifactID as the application name and versions the image using pom.xml version.The Pipeline builds, runs Unit tests, and deploys to a DEV/TEST environment in OpenShift, whilst updating Configuration-As-Code from `k8s/dev` and `k8s/test` |
+|  ci/Jenkinsfile.prod  |                                                Base Jenkinsfile for Promotion to a PROD namespace. The Jenkinsfile reads thepom.xml ArtifactID as the application name and versions the image using pom.xml version. Expects an imagestream with the application name in the TEST-environment.                                                |
+|   ci/pipeline.yaml    |                                                                                                       JenkinsPipeline type build, used to create a Openshift Pipeline which is connected to Jenkins. Used for DEV/TEST `ci/Jenkinsfile`                                                                                                       |
+| ci/pipeline.prod.yaml |                                                                                                  JenkinsPipeline type build, used to create a Openshift Pipeline which is connected to Jenkins. Used for PROD and runs `ci/Jenkinsfile.prod`                                                                                                  |
+
+## Prerequisites
+
+<a id="cicdpr"> </a>
+
+## Setup
+
+<a id="cicdsetup"> </a>
 
 # Usage with S2I images
 

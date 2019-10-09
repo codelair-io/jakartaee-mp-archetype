@@ -80,7 +80,7 @@ pipeline {
                             openshift.tag("${DEVENV}/${APPNAME}:${VERSION}", "${TESTENV}/${APPNAME}:${VERSION}")
 
                            def dc = openshift.selector('dc', "${APPNAME}")
-                           // this will wait until the desired replicas are available
+                           // Wait until the desired replicas are available
                            dc.rollout().status()
                         }
                     }

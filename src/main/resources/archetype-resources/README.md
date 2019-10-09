@@ -72,10 +72,36 @@ The archetype provides with preconfigured Jenkins pipelines to allow for a quick
 ## Prerequisites
 
 <a id="cicdpr"> </a>
+The pipeline build configures all OpenShift resources as a part of the Jenkins Pipeline for each environment (DEV / TEST / PROD). The pipeline expects kubernetes resources in a `./k8s` folder, `./k8s/dev` for the DEV environment, `./k8s/test` for the TEST environment, and `./k8s/prod` for the PROD environment.  
 
+  
+For this to work you first need to follow step 2 described in each docker image README (e.g. [this](https://hub.docker.com/r/hassenasse/s2i-openliberty) for OpenLiberty), and then follow the below steps:  
+1. `oc login` to your openshift instance
+2. Export resources
+    - For DEV:  
+    `oc get bc/<app-name> --export -o yaml > ./k8s/dev/buildconfig.yaml`  
+    `oc get dc/<app-name> --export -o yaml > ./k8s/dev/depoyconfig.yaml`
+    - For TEST:  
+        `oc get dc/<app-name> --export -o yaml > ./k8s/test/depoyconfig.yaml`
+    - For PROD:  
+        `oc get dc/<app-name> --export -o yaml > ./k8s/prod/depoyconfig.yaml`
+        
+This merely sets you up with the basics for deployment in Openshift, you may want to export more resources such as Kubernetes
+ConfigMaps, Routes, Replication Controllers etc in the future, and wire them up in each corresponding Jenkins Pipeline.
+    
 ## Setup
-
 <a id="cicdsetup"> </a>
+With the prerequisites finished and all folders in place. We need to change all `#` commented parts in the provided CI/CD files:  
+
+1. `./ci/pipeline.yaml`
+2. `./ci/pipeline.prod.yaml`
+
+After the values are updated to suit your application, we can provision our pipeline:  
+`oc create -f ci/pipeline.yaml`
+
+Because OpenShift has a very tight integration with Jenkins, it should provision a Jenkins Server with the pipeline
+provided.
+
 
 # Usage with S2I images
 

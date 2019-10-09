@@ -22,7 +22,4 @@ spec:
   strategy:
     jenkinsPipelineStrategy:
       jenkinsfilePath: ci/Jenkinsfile.prod
-      env:
-        - name: SERVICE_URL
-          value: #ADD TEST-ENV ROUTE HERE FOR INTEGRATION TESTS
     type: JenkinsPipeline

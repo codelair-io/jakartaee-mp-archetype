@@ -6,7 +6,7 @@ pipeline {
     environment {
         VERSION = readMavenPom().getVersion()
         APPNAME = readMavenPom().getArtifactId()
-        TESTENV = "${APPNAME}-PROD"
+        TESTENV = "${APPNAME}-TEST"
         PRODENV = "${APPNAME}-PROD"
     }
 
@@ -33,7 +33,7 @@ pipeline {
                             openshift.tag("${TESTENV}/${APPNAME}:${VERSION}", "${PRODENV}/${APPNAME}:${VERSION}")
 
                            def dc = openshift.selector('dc', "${APPNAME}")
-                           // this will wait until the desired replicas are available
+                           // Wait until the desired replicas are available
                            dc.rollout().status()
                         }
                     }

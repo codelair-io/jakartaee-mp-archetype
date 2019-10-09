@@ -5,9 +5,9 @@ pipeline {
 
     environment {
         VERSION = readMavenPom().getVersion()
-        APPNAME = readMavenPom().getArtifactId()
-        DEVENV = "${APPNAME}-DEV"
-        TESTENV = "${APPNAME}-TEST"
+        APPNAME = readMavenPom().getArtifactId().toLowerCase()
+        DEVENV = "${APPNAME}-dev"
+        TESTENV = "${APPNAME}-test"
     }
 
     stages {
@@ -27,9 +27,10 @@ pipeline {
             steps {
                 script {
                     openshift.withCluster() {
-                        openshift.withProject() {
-                            openshift.apply("-f k8s/dev/buildconfig.yaml --namespace ${DEVENV}")
-                            openshift.apply("-f k8s/dev/deployconfig.yaml --namespace ${DEVENV}")
+                        openshift.withProject("${DEVENV}") {
+                            openshift.apply("-f k8s/dev/buildconfig.yaml")
+                            openshift.apply("-f k8s/dev/deployconfig.yaml")
+                            openshift.apply("-f k8s/dev/service.yaml")
                         }
                     }
                 }
@@ -40,10 +41,11 @@ pipeline {
             steps {
                 script {
                     openshift.withCluster() {
-                        openshift.withProject() {
+                        openshift.withProject("${DEVENV}") {
                             def buildConfig = openshift.selector("bc", APPNAME);
-                            def build = buildConfig.startBuild("--from-dir . --namespace ${DEVENV}");
-                            build.logs("-f --namespace ${DEVENV}");
+                            def build = buildConfig.startBuild("--from-dir .");
+
+                            build.logs("-f");
                             openshift.tag("${DEVENV}/${APPNAME}:latest", "${DEVENV}/${APPNAME}:${VERSION}")
                         }
                     }
@@ -63,8 +65,9 @@ pipeline {
             steps {
                 script {
                     openshift.withCluster() {
-                        openshift.withProject() {
-                            openshift.apply("-f k8s/test/deployconfig.yaml --namespace ${TESTENV}")
+                        openshift.withProject("${TESTENV}") {
+                            openshift.apply("-f k8s/test/deployconfig.yaml")
+                            openshift.apply("-f k8s/test/service.yaml")
                         }
                     }
                 }
@@ -78,6 +81,7 @@ pipeline {
                         openshift.withProject("${TESTENV}") {
                             openshift.tag("${DEVENV}/${APPNAME}:${VERSION}", "${TESTENV}/${APPNAME}:latest")
                             openshift.tag("${DEVENV}/${APPNAME}:${VERSION}", "${TESTENV}/${APPNAME}:${VERSION}")
+
 
                            def dc = openshift.selector('dc', "${APPNAME}")
                            // Wait until the desired replicas are available

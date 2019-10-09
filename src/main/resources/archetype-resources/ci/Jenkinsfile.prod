@@ -5,9 +5,9 @@ pipeline {
 
     environment {
         VERSION = readMavenPom().getVersion()
-        APPNAME = readMavenPom().getArtifactId()
-        TESTENV = "${APPNAME}-TEST"
-        PRODENV = "${APPNAME}-PROD"
+        APPNAME = readMavenPom().getArtifactId().toLowerCase()
+        TESTENV = "${APPNAME}-test"
+        PRODENV = "${APPNAME}-prod"
     }
 
     stages {
@@ -16,8 +16,9 @@ pipeline {
             steps {
                 script {
                     openshift.withCluster() {
-                        openshift.withProject() {
-                            openshift.apply("-f k8s/prod/deployconfig.yaml --namespace ${PRODENV}")
+                        openshift.withProject("${PRODENV}") {
+                            openshift.apply("-f k8s/prod/deployconfig.yaml")
+                            openshift.apply("-f k8s/prod/service.yaml")
                         }
                     }
                 }

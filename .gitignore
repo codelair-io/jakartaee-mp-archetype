@@ -54,4 +54,5 @@ hs_err_pid*
 
 # misc
 .project
+.classpath/
 dev/

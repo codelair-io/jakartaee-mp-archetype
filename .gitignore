@@ -56,3 +56,4 @@ hs_err_pid*
 .project
 .classpath/
 dev/
+!k8s/dev/

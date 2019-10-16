@@ -24,5 +24,5 @@ spec:
       jenkinsfilePath: ci/Jenkinsfile
       env:
         - name: SERVICE_URL
-          value: #ADD TEST-ENV ROUTE HERE FOR INTEGRATION TESTS
+          value: #OPTIONAL: ADD TEST-ENV ROUTE HERE FOR INTEGRATION TESTS
     type: JenkinsPipeline

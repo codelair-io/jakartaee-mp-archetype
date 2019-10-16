@@ -111,7 +111,7 @@ A Thin-WAR packaged application often contains only the application source code 
 
 | Application Server | Config Folder Name | S2I Image                                                                                                 |   Availability   |
 | ------------------ | ------------------ | --------------------------------------------------------------------------------------------------------- | :--------------: |
-| IBM OpenLiberty    | ./liberty/         | [hassenasse/s2i-openliberty:[19.0.0.8-jdk1.8/jdk11]](https://hub.docker.com/r/hassenasse/s2i-openliberty) |    Available     |
+| IBM OpenLiberty    | ./liberty/         | [hassenasse/s2i-openliberty:[19.0.0.9-jdk1.8/jdk11]](https://hub.docker.com/r/hassenasse/s2i-openliberty) |    Available     |
 | Payara Micro       | ./payara/          | [hassenasse/s2i-payara-micro:[5.193-jdk1.8/jdk11]](https://hub.docker.com/r/hassenasse/s2i-payara-micro)  |    Available     |
 | KumuluzEE          | ./kumuluz/         | hassenasse/s2i-kumuluzee:[..]                                                                             | Work In Progress |
 | Apache TomEE       | ./tomee/           | hassenasse/s2i-tomee:[..]                                                                                 | Work In Progress |

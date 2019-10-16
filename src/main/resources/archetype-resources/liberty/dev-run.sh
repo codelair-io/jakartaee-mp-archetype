@@ -2,7 +2,7 @@
 
 # Runs a development environment on a local docker-engine or any OCI compliant engine
 # Also attaches volume mounts to ./liberty and ./target folder.
-SERVER_VERSION=19.0.0.8
+SERVER_VERSION=19.0.0.9
 JDK_VERSION=jdk$(cat pom.xml | grep 'java.version>' | cut -d '<' -f 2 | cut -d '>' -f 2)
 WAR_NAME=$(cat pom.xml | grep 'artifactId>' -m1 | cut -d '<' -f 2 | cut -d '>' -f 2)
 CONTAINER_NAME=development-openliberty-${JDK_VERSION}

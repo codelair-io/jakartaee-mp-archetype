@@ -28,9 +28,17 @@
                 <include>README.md</include>
                 <include>wad*</include>
                 <include>*mvn*</include>
-                <include>.mvn/*</include>
+                <include>.mvn/wrapper/maven-wrapper.jar</include>
+                <include>.mvn/wrapper/maven-wrapper.properties</include>
+                <include>.mvn/wrapper/MavenWrapperDownloader.java</include>
                 <include>liberty/</include>
                 <include>payara/</include>
+                <include>payara/asadmin-postboot</include>
+                <include>payara/asadmin-preboot</include>
+                <include>payara/asadmin-postdeploy</include>
+                <include>metrics/</include>
+                <include>ci/</include>
+                <include>.gitignore</include>
             </includes>
         </fileSet>
     </fileSets>

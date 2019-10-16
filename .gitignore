@@ -54,4 +54,6 @@ hs_err_pid*
 
 # misc
 .project
+.classpath/
 dev/
+!k8s/dev/

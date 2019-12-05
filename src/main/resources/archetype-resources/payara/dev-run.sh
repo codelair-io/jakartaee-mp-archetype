@@ -15,7 +15,7 @@ echo "--> Starting WAD (Watch and Deploy)..."
 java -jar wad.jar /tmp/wad-dropins/ &
 
 echo "--> Running payara dev-environment v${SERVER_VERSION} using ${JDK_VERSION} on docker"
-docker run -d --rm \
+docker run --rm \
     -p 8080:8080 -p 8181:8181 -p 4848:4848 -p 9009:9009 \
     -v "$(pwd)"/payara/lib/:/opt/payara/appserver/glassfish/domains/production/lib/ \
     -v /tmp/wad-dropins/:/opt/payara/appserver/glassfish/domains/production/autodeploy/ \

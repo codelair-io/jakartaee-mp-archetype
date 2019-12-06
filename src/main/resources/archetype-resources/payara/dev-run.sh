@@ -11,11 +11,11 @@ echo "Server version: ${SERVER_VERSION}"
 echo "JDK version (extracted from pom.xml): ${JDK_VERSION}"
 echo "WAR name (extracted from pom.xml): ${WAR_NAME}"
 
-echo "--> Pre-building application using maven"
-./mvnw clean install
+echo "--> Starting WAD (Watch and Deploy)..."
+java -jar wad.jar /tmp/wad-dropins/ &
 
 echo "--> Running payara dev-environment v${SERVER_VERSION} using ${JDK_VERSION} on docker"
-docker run -d --rm \
+docker run --rm \
     -p 8080:8080 -p 8181:8181 -p 4848:4848 -p 9009:9009 \
     -v "$(pwd)"/payara/lib/:/opt/payara/appserver/glassfish/domains/production/lib/ \
     -v /tmp/wad-dropins/:/opt/payara/appserver/glassfish/domains/production/autodeploy/ \
@@ -23,7 +23,3 @@ docker run -d --rm \
     -v "$(pwd)"/payara/asadmin-preboot:/opt/payara/config/pre-boot-commands.asadmin \
     --name ${CONTAINER_NAME} \
     hassenasse/payara:${SERVER_VERSION}-${JDK_VERSION}
-
-
-echo "--> Starting WAD (Watch and Deploy)..."
-java -jar wad.jar /tmp/wad-dropins/

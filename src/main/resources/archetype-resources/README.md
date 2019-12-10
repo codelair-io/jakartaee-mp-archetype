@@ -5,7 +5,7 @@ A starter archetype for a ThinWar project using Jakarta EE and MicroProfile, wit
 | Dependency           | Version |
 | -------------------- | ------- |
 | Java EE / Jakarta EE | 8       |
-| MicroProfile         | 3.0     |
+| MicroProfile         | 3.2     |
 
 The archetype is built to be highly configurable, however we are somewhat opinionated:
 
@@ -24,16 +24,12 @@ The archetype is built to be highly configurable, however we are somewhat opinio
 3: [Usage with S2I images](#s2i)  
 -> 3.1: [IBM OpenLiberty](#s2iol)  
 ----> 3.1.1: [Development](#s2ioldev)  
+----> 3.1.1.1: [Purpose of .env-file](#s2ioldevenv)  
 ----> 3.1.2: [S2I Deployment](#s2iols2i)  
 -> 3.2: [Payara Micro](#s2ipm)  
 ----> 3.2.1: [Development](#s2ipmdev)  
+----> 3.1.1.1: [Purpose of .env-file](#s2ipmdevenv)  
 ----> 3.2.2: [S2I Deployment](#s2ipms2i)  
--> 3.3: [KumuluzEE](#s2ikmee) **(COMING SOON)**  
-----> 3.3.1: [Development](#s2ikmeedev)  
-----> 3.3.2: [S2I Deployment](#s2ikmees2i)  
--> 3.4: [Apache TomEE](#s2iatee) **(COMING SOON)**  
-----> 3.4.1: [Development](#s2iateedev)  
-----> 3.4.2: [S2I Deployment](#s2iatees2i)
 
 # Metrics using Prometheus + Grafana
 
@@ -111,10 +107,8 @@ A Thin-WAR packaged application often contains only the application source code 
 
 | Application Server | Config Folder Name | S2I Image                                                                                                 |   Availability   |
 | ------------------ | ------------------ | --------------------------------------------------------------------------------------------------------- | :--------------: |
-| IBM OpenLiberty    | ./liberty/         | [hassenasse/s2i-openliberty:[19.0.0.9-jdk1.8/jdk11]](https://hub.docker.com/r/hassenasse/s2i-openliberty) |    Available     |
-| Payara Micro       | ./payara/          | [hassenasse/s2i-payara-micro:[5.193-jdk1.8/jdk11]](https://hub.docker.com/r/hassenasse/s2i-payara-micro)  |    Available     |
-| KumuluzEE          | ./kumuluz/         | hassenasse/s2i-kumuluzee:[..]                                                                             | Work In Progress |
-| Apache TomEE       | ./tomee/           | hassenasse/s2i-tomee:[..]                                                                                 | Work In Progress |
+| IBM OpenLiberty    | ./liberty/         | [hassenasse/s2i-openliberty:[19.0.0.12-jdk1.8/jdk11]](https://hub.docker.com/r/hassenasse/s2i-openliberty) |    Available     |
+| Payara Micro       | ./payara/          | [hassenasse/s2i-payara-micro:[5.194-jdk1.8/jdk11]](https://hub.docker.com/r/hassenasse/s2i-payara-micro)  |    Available     |
 
 Choose the application server needed for your particular project, and discard the rest of the config-folders. Based on the selection of application server vendor, the MicroProfile dependency version in the `pom.xml` might require tweaking. Per default the archetype ships with `MicroProfile 3.0`. Read the corresponding server documentation and s2i doc for more information about the supporting MP version.
 
@@ -139,6 +133,18 @@ A `dev-run.sh` script is provided under `./liberty` folder to allow running a lo
    Whilst developing, `wad` will watch for file changes in `src`, run a `mvn clean install` to a artifact directory which the docker image is mounted to.
 2. Inspect the image using `docker container ls`
 3. Inspect logs using `docker logs development-openliberty-jdk<11/1.8> -f`
+4. If required, use IDE to connect a remote-debugger to the running docker container.
+- Use port `5005` and dt_socket connection
+
+#### Purpose of .env-file
+<a id="s2ioldevenv"> </a>
+When working with containers, you most probably have to provide credentials to your applications for different S2S (Service-to-Service) or DB connections. Although configuration as code is beneficial, 
+  
+it's an anti-pattern to store DB passwords in VSC. We therefore provide with an `.env-file` text file which is injected into the docker-container (see `dev-run.sh`). The file is also `.gitignore`'ed 
+so as to not allow committing it into VSC.
+ 
+This is generally only a local-dev environment issue, as docker-swarm / kubernetes / Openshift often solve this by providing injectable secrets for docker containers.   
+  
 
 ### S2I Deployment
 
@@ -175,6 +181,17 @@ A `dev-run.sh` script is provided under `./payara` folder to allow running a loc
    Whilst developing, `wad` will watch for file changes in `src`, run a `mvn clean install` to a artifact directory which the docker image is mounted to.
 2. Inspect the image using `docker container ls`
 3. Inspect logs using `docker logs development-payara-full-jdk<11/1.8> -f`
+4. If required, use IDE to connect a remote-debugger to the running docker container.
+- Use port `5005` and dt_socket connection
+
+#### Purpose of .env-file
+<a id="s2ipmdevenv"> </a>
+When working with containers, you most probably have to provide credentials to your applications for different S2S (Service-to-Service) or DB connections. Although configuration as code is beneficial, 
+  
+it's an anti-pattern to store DB passwords in VSC. We therefore provide with an `.env-file` text file which is injected into the docker-container (see `dev-run.sh`). The file is also `.gitignore`'ed 
+so as to not allow committing it into VSC.
+ 
+This is generally only a local-dev environment issue, as docker-swarm / kubernetes / Openshift often solve this by providing injectable secrets for docker containers.   
 
 ### S2I Deployment
 
@@ -188,39 +205,3 @@ Below is en excerpt from https://hub.docker.com/r/hassenasse/s2i-payara-micro, w
 | asadmin-postboot   |                                                        Provides a file of asadmin commands to run after booting the server                                                         |
 | asadmin-postdeploy |                                                  Provides a file of asadmin commands to run after all deployments have completed                                                   |
 | lib/               | Allows adding various third-party libraries to the class path of a Payara Micro instance. Use cases may include required JDBC drivers, or libraries used by multiple applications. |
-
-## KumuluzEE
-
-<a id="s2ikmee"> </a>
-
-> IMPORTANT: The archetype merely pulls in a workable starting point. All configuration files in the respective server-folders should be reviewed and tuned before deploy.
-
-### Development
-
-<a id="s2ikmeedev"> </a>
-
-Coming soon
-
-### S2I Deployment
-
-<a id="s2ikmees2i"> </a>
-
-Coming soon
-
-## Apache TomEE
-
-<a id="s2iatee"> </a>
-
-> IMPORTANT: The archetype merely pulls in a workable starting point. All configuration files in the respective server-folders should be reviewed and tuned before deploy.
-
-### Development
-
-<a id="s2iateedev"> </a>
-
-Coming soon
-
-### S2I Deployment
-
-<a id="s2iatees2i"> </a>
-
-Coming soon

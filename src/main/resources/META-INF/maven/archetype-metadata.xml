@@ -38,7 +38,8 @@
                 <include>payara/asadmin-postdeploy</include>
                 <include>metrics/</include>
                 <include>ci/</include>
-                <include>.gitignore</include>
+                <include>.wad-dropins/</include>
+                <include>.env-file</include>
             </includes>
         </fileSet>
     </fileSets>

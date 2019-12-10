@@ -10,3 +10,6 @@ delete-jvm-options -client:-Xmx1024:-Xms512
 create-jvm-options -server:-Xmx2048:-Xms2048
 deploy /opt/payara/deployments/abc-app.war
 deploy /opt/payara/deployments/.autodeploystatus
+
+#Adding JPDA remote debugging agent
+create-jvm-options -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=0.0.0.0:5005

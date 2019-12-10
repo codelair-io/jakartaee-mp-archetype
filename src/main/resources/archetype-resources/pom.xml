@@ -10,7 +10,8 @@
 
     <!--project properties-->
     <properties>
-	    <java.version>1.8</java.version>
+	    <java.version>11</java.version>
+        <server.version>19.0.0.12</server.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <failOnMissingWebXml>false</failOnMissingWebXml>
@@ -27,7 +28,7 @@
         <dependency>
             <groupId>org.eclipse.microprofile</groupId>
             <artifactId>microprofile</artifactId>
-            <version>3.0</version>
+            <version>3.2</version>
             <scope>provided</scope>
             <type>pom</type>
         </dependency>

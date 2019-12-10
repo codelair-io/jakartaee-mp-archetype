@@ -10,7 +10,7 @@
     <!--Project identifier-->
     <groupId>net.hassannazar</groupId>
     <artifactId>jakartaee-mp-archetype</artifactId>
-    <version>1.4.0-SNAPSHOT</version>
+    <version>1.4.0</version>
     <packaging>maven-archetype</packaging>
 
     <name>Jakarta EE and MicroProfile Archetype</name>
@@ -52,7 +52,7 @@
         <connection>scm:git:git@github.com:HasseNasse/jakartaee-mp-archetype.git</connection>
         <url>scm:git:git@github.com:HasseNasse/jakartaee-mp-archetype.git</url>
         <developerConnection>scm:git:git@github.com:HasseNasse/jakartaee-mp-archetype.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>v1.4.0</tag>
     </scm>
 
     <!--Distribution Management-->

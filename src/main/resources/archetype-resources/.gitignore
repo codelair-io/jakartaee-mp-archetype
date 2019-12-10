@@ -55,3 +55,7 @@ hs_err_pid*
 # misc
 .project
 dev/
+
+#files to not include in final project VCS
+.env-file
+.wad-dropins/

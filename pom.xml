@@ -8,7 +8,7 @@
     </parent>
 
     <!--Project identifier-->
-    <groupId>net.hassannazar</groupId>
+    <groupId>io.codelair</groupId>
     <artifactId>jakartaee-mp-archetype</artifactId>
     <version>1.4.1-SNAPSHOT</version>
     <packaging>maven-archetype</packaging>

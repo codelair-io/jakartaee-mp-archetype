@@ -3,8 +3,8 @@
 
     <!-- Enable features -->
     <featureManager>
-        <feature>microProfile-3.0</feature>
-        <feature>javaee-8.0</feature>
+        <feature>microProfile-3.2</feature>
+        <feature>jakartaee-8.0</feature>
     </featureManager>
 
     <httpEndpoint id="defaultHttpEndpoint" host="*" httpPort="${HTTP_PORT}" httpsPort="${HTTPS_PORT}" />

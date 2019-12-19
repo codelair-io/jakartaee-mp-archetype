@@ -129,12 +129,27 @@ A `dev-run.sh` script is provided under `./liberty` folder to allow running a lo
 - jvm.properties
 - bootstrap.properties
 
+#### Development using Docker
 1. Start the dev-environment using `./liberty/dev-run.sh`  
    Whilst developing, `wad` will watch for file changes in `src`, run a `mvn clean install` to a artifact directory which the docker image is mounted to.
 2. Inspect the image using `docker container ls`
 3. Inspect logs using `docker logs development-openliberty-jdk<11/1.8> -f`
 4. If required, use IDE to connect a remote-debugger to the running docker container.
 - Use port `5005` and dt_socket connection
+
+#### Development using local host-machine
+1. Add the following plugin between `<build>` tags:
+```
+   <plugin>
+       <groupId>io.openliberty.tools</groupId>
+       <artifactId>liberty-maven-plugin</artifactId>
+       <version>[3.1,)</version>
+       <configuration>
+           <configDirectory>${project.basedir}/liberty/</configDirectory>
+       </configuration>
+   </plugin>
+```
+2. Run `mvn liberty:dev`. Liberty's development mode will monitor the src/ directory and 
 
 #### Purpose of .env-file
 <a id="s2ioldevenv"> </a>

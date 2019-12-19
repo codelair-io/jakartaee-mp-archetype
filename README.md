@@ -1,6 +1,8 @@
 # Jakarta EE 8 & MicroProfile Starter Archetype
 A starter archetype for a ThinWar project using Jakarta EE and MicroProfile, without sketchy parent-pom's.
 
+[Archetype Documentation](https://github.com/codelair-io/jakartaee-mp-archetype/blob/master/src/main/resources/archetype-resources/README.md)
+
 ## Project Generation (Interactive Mode)
 
 `mvn archetype:generate -DarchetypeGroupId=io.codelair -DarchetypeArtifactId=jakartaee-mp-archetype -DarchetypeVersion=1.5.0  `  

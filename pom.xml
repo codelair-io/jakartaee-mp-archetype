@@ -8,16 +8,16 @@
     </parent>
 
     <!--Project identifier-->
-    <groupId>net.hassannazar</groupId>
+    <groupId>io.codelair</groupId>
     <artifactId>jakartaee-mp-archetype</artifactId>
-    <version>1.4.0</version>
+    <version>1.5.0</version>
     <packaging>maven-archetype</packaging>
 
     <name>Jakarta EE and MicroProfile Archetype</name>
     <description>
         A starter archetype for a ThinWar project using Jakarta EE and MicroProfile, without any sketchy parent-pom's.
     </description>
-    <url>https://github.com/HasseNasse/jakartaee-mp-archetype</url>
+    <url>https://github.com/codelair-io/jakartaee-mp-archetype</url>
 
     <!-- Project Properties -->
     <properties>
@@ -27,8 +27,8 @@
 
     <!--Organization-->
     <organization>
-        <name>Hassan Nazar</name>
-        <url>https://hassannazar.net</url>
+        <name>RedBridge Technology</name>
+        <url>https://codelair.io</url>
     </organization>
 
     <developers>
@@ -49,9 +49,9 @@
 
     <!--SCM-->
     <scm>
-        <connection>scm:git:git@github.com:HasseNasse/jakartaee-mp-archetype.git</connection>
-        <url>scm:git:git@github.com:HasseNasse/jakartaee-mp-archetype.git</url>
-        <developerConnection>scm:git:git@github.com:HasseNasse/jakartaee-mp-archetype.git</developerConnection>
+        <connection>scm:git:git@github.com:codelair-io/jakartaee-mp-archetype.git</connection>
+        <url>scm:git:git@github.com:codelair-io/jakartaee-mp-archetype.git</url>
+        <developerConnection>scm:git:git@github.com:codelair-io/jakartaee-mp-archetype.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 

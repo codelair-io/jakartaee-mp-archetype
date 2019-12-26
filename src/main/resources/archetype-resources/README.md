@@ -24,14 +24,16 @@ The archetype is built to be highly configurable, however we are somewhat opinio
 3: [Usage with S2I images](#s2i)  
 -> 3.1: [IBM OpenLiberty](#s2iol)  
 ----> 3.1.1: [Development](#s2ioldev)  
-----> 3.1.1.1: [Purpose of .env-file](#s2ioldevenv)  
+----> 3.1.1.1: [Development using Docker](#s2ioldevdocker)  
+----> 3.1.1.2: [Development using local host-machine](#s2ioldevlocal)  
+----> 3.1.1.3: [Purpose of .env-file](#s2ioldevenv)  
 ----> 3.1.2: [S2I Deployment](#s2iols2i)  
 -> 3.2: [Payara Micro](#s2ipm)  
 ----> 3.2.1: [Development](#s2ipmdev)  
 ----> 3.1.1.1: [Purpose of .env-file](#s2ipmdevenv)  
 ----> 3.2.2: [S2I Deployment](#s2ipms2i)  
 
-# Metrics using Prometheus + Grafana
+# 1 Metrics using Prometheus + Grafana
 
 <a id="metrics"> </a>
 
@@ -42,7 +44,7 @@ An folder with name `./metrics` is provided with the following files:
 | ./metrics/prometheus.yml  | YAML formatted type which is injected into the prometheus runtime for configuration. This file defines various scraping targets for prometheus and scrape interval etc. |
 | ./metrics/metrics-init.sh | Shell-script for initiating a prometheus and grafana docker-containers.                                                                                                 |
 
-## Gathering and visualizing
+## 1.1 Gathering and visualizing
 
 <a id="metrics11"> </a>
 
@@ -53,7 +55,7 @@ An folder with name `./metrics` is provided with the following files:
 4. Navigate to `http://localhost:3000` and configure a `browser` based prometheus datasource which points to `http://localhost:9090`. Choose `save and test`.
 5. You can now create your dashboards using the Prometheus/OpenMetrics-QL.
 
-# CI/CD
+# 2 CI/CD
 
 <a id="cicd"> </a>
 The archetype provides with preconfigured Jenkins pipelines to allow for a quicker CI/CD setup both locally and/or on OpenShift. The following files are provided:
@@ -65,7 +67,7 @@ The archetype provides with preconfigured Jenkins pipelines to allow for a quick
 |   ci/pipeline.yaml    |                                                                                                       JenkinsPipeline type build, used to create a Openshift Pipeline which is connected to Jenkins. Used for DEV/TEST `ci/Jenkinsfile`                                                                                                       |
 | ci/pipeline.prod.yaml |                                                                                                  JenkinsPipeline type build, used to create a Openshift Pipeline which is connected to Jenkins. Used for PROD and runs `ci/Jenkinsfile.prod`                                                                                                  |
 
-## Prerequisites
+## 2.1 Prerequisites
 
 <a id="cicdpr"> </a>
 The pipeline build configures all OpenShift resources as a part of the Jenkins Pipeline for each environment (DEV / TEST / PROD). The pipeline expects kubernetes resources in a `./k8s` folder, `./k8s/dev` for the DEV environment, `./k8s/test` for the TEST environment, and `./k8s/prod` for the PROD environment.  
@@ -85,7 +87,7 @@ For this to work you first need to follow step 2 described in each docker image 
 This merely sets you up with the basics for deployment in Openshift, you may want to export more resources such as Kubernetes
 ConfigMaps, Routes, Replication Controllers etc in the future, and wire them up in each corresponding Jenkins Pipeline.
     
-## Setup
+## 2.2 Setup
 <a id="cicdsetup"> </a>
 With the prerequisites finished and all folders in place. We need to change all `#` commented parts in the provided CI/CD files:  
 
@@ -99,7 +101,7 @@ Because OpenShift has a very tight integration with Jenkins, it should provision
 provided.
 
 
-# Usage with S2I images
+# 3 Usage with S2I images
 
 <a id="s2i"> </a>
 
@@ -112,13 +114,13 @@ A Thin-WAR packaged application often contains only the application source code 
 
 Choose the application server needed for your particular project, and discard the rest of the config-folders. Based on the selection of application server vendor, the MicroProfile dependency version in the `pom.xml` might require tweaking. Per default the archetype ships with `MicroProfile 3.0`. Read the corresponding server documentation and s2i doc for more information about the supporting MP version.
 
-## IBM OpenLiberty
+## 3.1 IBM OpenLiberty
 
 <a id="s2iol"> </a>
 
 > IMPORTANT: The archetype merely pulls in a workable starting point. All configuration files in the respective server-folders should be reviewed and tuned before deploy.
 
-### Development
+### 3.1.1 Development
 
 <a id="s2ioldev"> </a>
 
@@ -129,6 +131,8 @@ A `dev-run.sh` script is provided under `./liberty` folder to allow running a lo
 - jvm.properties
 - bootstrap.properties
 
+#### 3.1.1.1 Development using Docker
+<a id="s2ioldevdocker"> </a>
 1. Start the dev-environment using `./liberty/dev-run.sh`  
    Whilst developing, `wad` will watch for file changes in `src`, run a `mvn clean install` to a artifact directory which the docker image is mounted to.
 2. Inspect the image using `docker container ls`
@@ -136,7 +140,22 @@ A `dev-run.sh` script is provided under `./liberty` folder to allow running a lo
 4. If required, use IDE to connect a remote-debugger to the running docker container.
 - Use port `5005` and dt_socket connection
 
-#### Purpose of .env-file
+#### 3.1.1.2 Development using local host-machine
+<a id="s2ioldevlocal"> </a>
+1. Add the following plugin between `<build>` tags:
+```
+   <plugin>
+       <groupId>io.openliberty.tools</groupId>
+       <artifactId>liberty-maven-plugin</artifactId>
+       <version>[3.1,)</version>
+       <configuration>
+           <configDirectory>${project.basedir}/liberty/</configDirectory>
+       </configuration>
+   </plugin>
+```
+2. Run `mvn liberty:dev`. Liberty's development mode will monitor the src/ directory and 
+
+#### 3.1.1.3 Purpose of .env-file
 <a id="s2ioldevenv"> </a>
 When working with containers, you most probably have to provide credentials to your applications for different S2S (Service-to-Service) or DB connections. Although configuration as code is beneficial, 
   
@@ -146,7 +165,7 @@ so as to not allow committing it into VSC.
 This is generally only a local-dev environment issue, as docker-swarm / kubernetes / Openshift often solve this by providing injectable secrets for docker containers.   
   
 
-### S2I Deployment
+### 3.1.2 S2I Deployment
 
 <a id="s2iols2i"> </a>
 
@@ -160,13 +179,13 @@ Below is en excerpt from https://hub.docker.com/r/hassenasse/s2i-openliberty, wh
 | bootstrap.properties | The bootstrap.properties file is optional but, when present, it is read during Open Liberty bootstrap to provide config for the earliest stages of the server start-up. It is read by the server much earlier than server.xml so it can affect the start-up and behavior of the Open Liberty kernel right from the start. |
 | resources/           |                                                                       Shared resource definitions: adapters, data sources, are injected into `wlp/usr/shared/resources/`. Can be referenced in server.xml using `${shared.resource.dir}` property.                                                                        |
 
-## Payara Micro
+## 3.2 Payara Micro
 
 <a id="s2ipm"> </a>
 
 > IMPORTANT: The archetype merely pulls in a workable starting point. All configuration files in the respective server-folders should be reviewed and tuned before deploy.
 
-### Development
+### 3.2.1 Development
 
 <a id="s2ipmdev"> </a>
 
@@ -184,7 +203,7 @@ A `dev-run.sh` script is provided under `./payara` folder to allow running a loc
 4. If required, use IDE to connect a remote-debugger to the running docker container.
 - Use port `5005` and dt_socket connection
 
-#### Purpose of .env-file
+#### 3.2.1.1 Purpose of .env-file
 <a id="s2ipmdevenv"> </a>
 When working with containers, you most probably have to provide credentials to your applications for different S2S (Service-to-Service) or DB connections. Although configuration as code is beneficial, 
   
@@ -193,7 +212,7 @@ so as to not allow committing it into VSC.
  
 This is generally only a local-dev environment issue, as docker-swarm / kubernetes / Openshift often solve this by providing injectable secrets for docker containers.   
 
-### S2I Deployment
+### 3.2.2 S2I Deployment
 
 <a id="s2ipms2i"> </a>
 

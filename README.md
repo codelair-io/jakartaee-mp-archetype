@@ -1,4 +1,6 @@
 # Jakarta EE 8 & MicroProfile Starter Archetype
+[![Maven Central](https://img.shields.io/maven-central/v/io.codelair/jakartaee-mp-archetype.svg?label=Maven%20Central)](https://mvnrepository.com/artifact/io.codelair/jakartaee-mp-archetype)
+[![License](https://img.shields.io/badge/License-ASL%202.0-green.svg)](https://opensource.org/licenses/Apache-2.0)  
 A starter archetype for a ThinWar project using Jakarta EE and MicroProfile, without sketchy parent-pom's.
 
 [Archetype Documentation](https://github.com/codelair-io/jakartaee-mp-archetype/blob/master/src/main/resources/archetype-resources/README.md)
